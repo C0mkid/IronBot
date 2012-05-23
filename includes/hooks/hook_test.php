@@ -2,18 +2,18 @@
 
 class hook_test
 {
-    public function __construct()
-    {
-        global $hooks, $log;
+	public function __construct()
+	{
+		global $hooks, $log;
 
-        $log->add('test');
-        $hooks->attach('b', 'test');
-    }
+		$log->add('test');
+		$hooks->attach('b', 'test');
+	}
 
-    public function b()
-    {
-        global $log;
+	public function b()
+	{
+		global $log;
 
-        $log->add('b');
-    }
+		$log->add('b');
+	}
 }
