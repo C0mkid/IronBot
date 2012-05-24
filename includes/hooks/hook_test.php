@@ -14,6 +14,6 @@ class hook_test
 	{
 		global $log;
 
-		$log->add('b');
+		$log->add('b', LL_CRITICAL);
 	}
 }

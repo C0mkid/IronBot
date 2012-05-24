@@ -25,11 +25,16 @@ class log
 		$this->handle = fopen($root_path . 'logs/' . date('D_d-M-Y') . '_' . $n . '.log', 'a');
 	}
 
-	public function add($line)
+	public function add($line, $level = LL_INFO)
 	{
-		$eol = (!isset($_SERVER['HTTP_USER_AGENT'])) ? PHP_EOL : "<br />";
-		echo $line . $eol;
+		global $config;
+
 		fwrite($this->handle, $line . PHP_EOL);
+
+		if ($level >= $config['level'])
+		{
+			echo constant('LL_' . $level) . $line . ((!isset($_SERVER['HTTP_USER_AGENT'])) ? PHP_EOL : "<br />");
+		}
 	}
 
 	public function spacer($type)

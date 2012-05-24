@@ -5,6 +5,7 @@ class irc
 	private $config;
 	private $log;
 	private $handle;
+	private $read;
 
 	public function __construct()
 	{
@@ -25,15 +26,14 @@ class irc
 		if ($this->handle)
 		{
 			stream_set_timeout($this->handle, $this->config['timeout']);
-
-			return true;
 		}
 
-		return true;
+		return $this->handle;
 	}
 
 	public function read()
 	{
-
+		$this->read = fgets($this->handle, 1024);
+		return !empty($this->read);
 	}
 }
