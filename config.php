@@ -4,7 +4,6 @@ $config = array();
 
 $config['global'] = array(
 	'level'			=> LL_INFO,
-	'server'		=> 'localhost',
 	'port'		  	=> 6667,
 	'timeout'		=> 5,
 	'nick'			=> 'IronBot',
