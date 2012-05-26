@@ -3,15 +3,15 @@
 class irc
 {
 	private $config;
-	private $log;
 	private $handle;
 	private $read;
 
 	public function __construct()
 	{
-		global $log;
+		global $hooks;
 
-		$this->log = $log;
+		$hooks->add('read');
+		$hooks->add('write');
 	}
 
 	public function set($name, $variable)
@@ -33,7 +33,21 @@ class irc
 
 	public function read()
 	{
+		global $hooks;
+
 		$this->read = fgets($this->handle, 1024);
-		return !empty($this->read);
+		$hooks->exec('read', !empty($this->read) ? $this->read : null);
+		return !empty($this->read) ? $this->read : false;
+	}
+
+	public function send($message)
+	{
+		global $hooks;
+
+		if (!empty($message))
+		{
+			fwrite($this->handle, $message);
+			$hooks->exec('write', $message);
+		}
 	}
 }

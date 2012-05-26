@@ -7,7 +7,7 @@ class hooks
 
 	public function __construct()
 	{
-		$this->add('b');
+
 	}
 
 	public function add($name)
@@ -27,9 +27,17 @@ class hooks
 			return;
 		}
 
+		$args = array();
+
+		if (func_num_args() > 1)
+		{
+			$args = func_get_args();
+			array_shift($args);
+		}
+
 		foreach ($this->hooks[$name] as $object)
 		{
-			$this->objects[$object]->$name();
+			$this->objects[$object]->$name($args);
 		}
 	}
 
