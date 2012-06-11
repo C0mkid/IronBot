@@ -11,6 +11,7 @@ include($root_path . 'includes/functions_logs.php');
 
 $log = new log();
 $log->spacer(1);
+$configs = new configs();
 
 $dir = scandir($root_path . 'includes/');
 array_shift($dir);
@@ -18,10 +19,9 @@ array_shift($dir);
 
 foreach ($dir as $file)
 {
-	if (!in_array(substr($file, 0, strrpos($file, '.')), array('constants', 'functions', 'functions_configs', 'functions_logs')) && strpos($file, '.' . $phpEx) !== false)
+	if (!in_array(substr($file, 0, strrpos($file, '.')), array('functions_configs', 'functions_logs')) && strpos($file, '.' . $phpEx) !== false && preg_match('/functions_([a-zA-Z0-9\-_]*)\.php/', $file, $matches))
 	{
 		include($root_path . 'includes/' . $file);
-		$name = preg_match('/functions_([a-zA-Z0-9\-_]*)\.php/', $file, $matches);
 		$name = $matches[1];
 		$$name = new $name();
 	}

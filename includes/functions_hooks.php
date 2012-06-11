@@ -43,7 +43,7 @@ class hooks
 
 	public function attach($name, $object)
 	{
-		$this->hooks[$name] += array($object);
+		$this->hooks = array_merge($this->hooks, array($name => (array_key_exists($name, $this->hooks)) ? array_merge($this->hooks[$name], array($object)) : array($object)));
 	}
 
 	public function detach($name, $object)

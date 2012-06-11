@@ -29,12 +29,14 @@ class log
 	{
 		global $config;
 
-		fwrite($this->handle, $line . PHP_EOL);
-
-		if ($level >= $config['level'])
+		if (!isset($config['level']) || $config['level'] < $level)
 		{
+			fwrite($this->handle, $line . PHP_EOL);
 			echo constant('LL_' . $level) . $line . ((!isset($_SERVER['HTTP_USER_AGENT'])) ? PHP_EOL : "<br />");
+			return;
 		}
+
+		var_dump($config['level'], $level);
 	}
 
 	public function spacer($type)

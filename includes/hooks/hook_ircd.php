@@ -12,21 +12,23 @@ class hook_ircd
 
 	public function read($args)
 	{
-		global $logs;
+		global $irc, $log;
 
 		if (!empty($args))
 		{
-			$logs->add('[READ] ' . $args[0], LL_VERBOSE);
+			$log->add('[READ] ' . $args[0], LL_VERBOSE);
+
+			$read = explode(' ', $args[0]);
 		}
 	}
 
 	public function write($args)
 	{
-		global $logs;
+		global $log;
 
 		if (!empty($args))
 		{
-			$logs->add('[WRITE]' . $args[0], LL_VERBOSE);
+			$log->add('[WRITE] ' . $args[0], LL_VERBOSE);
 		}
 	}
 }

@@ -2,9 +2,13 @@
 
 class configs
 {
+	// @TODO: Rewrite configs class
+
 	public function loadConfig($name)
 	{
-		global $config;
+		global $config, $phpEx, $root_path;
+
+		include($root_path . 'includes/configs/config_' . $name . '.' . $phpEx);
 
 		// merge values with arrays together
 		foreach ($config[$name] as $setting => $value)
@@ -24,7 +28,7 @@ class configs
 			}
 		}
 
-		$config  = array_merge($config['global'], $config[$name], $config);
+		$config = array_merge($config['global'], $config[$name], $config);
 	}
 
 	public function loadConfigs()

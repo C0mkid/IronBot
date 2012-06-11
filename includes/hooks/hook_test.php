@@ -6,14 +6,15 @@ class hook_test
 	{
 		global $hooks, $log;
 
-		$log->add('test');
-		$hooks->attach('b', 'test');
+		//$log->add('test');
+		$hooks->attach('connect', 'test');
 	}
 
-	public function b()
+	public function connect()
 	{
 		global $log;
 
-		$log->add('b', LL_CRITICAL);
+		$args = func_get_args();
+		//var_dump($args[0]);
 	}
 }

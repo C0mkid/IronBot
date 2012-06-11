@@ -3,7 +3,7 @@
 $config = array();
 
 $config['global'] = array(
-	'level'			=> LL_INFO,
+	'level'			=> LL_DEBUG,
 	'port'		  	=> 6667,
 	'timeout'		=> 5,
 	'nick'			=> 'IronBot',
