@@ -8,6 +8,7 @@ $config['global'] = array(
 	'timeout'		=> 5,
 	'nick'			=> 'IronBot',
 	'alt'		  	=> '%s_',
+	'real'			=> 'IronBot',
 	'chan'			=> array('#IronBot', '#Comkid'),
 	'exec'			=> array('PRIVMSG NickServ :IDENTIFY IronBot'),
 );

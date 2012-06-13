@@ -70,7 +70,7 @@ class irc
 
 		if (!empty($message))
 		{
-			fwrite($this->handle, $message);
+			fwrite($this->handle, $message . (($message[strlen($message) - 1] != "\n") ? "\n" : ''));
 			$hooks->exec('write', $message);
 		}
 	}

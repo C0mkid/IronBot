@@ -53,4 +53,9 @@ class hooks
 			unset($this->hooks[$name][array_search($object, $this->hooks[$name])]);
 		}
 	}
+
+	public function exists($name)
+	{
+		return array_key_exists($name, $this->hooks);
+	}
 }

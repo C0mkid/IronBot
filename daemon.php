@@ -4,7 +4,7 @@ $root_path = './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($root_path . 'common.php');
 
-$configs->loadConfig('cool');
+$configs->loadConfig('rizon');
 
 $irc->loadconfig();
 $irc->connect();
@@ -13,18 +13,13 @@ $irc->connect();
 
 for ($tick = 0; $irc->connected(); $tick++, $read = $irc->read(), $start = microtime(true))
 {
-	$log->add('derp', LL_CRITICAL);
+	$log->add('Tick: ' . $tick, LL_CRITICAL);
 
 	if ($tick == 0)
 	{
-		$irc->send('NICK ComBot');
-		$irc->send('USER ComBot ComBot * :ComBot');
+		$irc->send('NICK ' . $config['nick']);
+		$irc->send('USER ' . $config['nick'] . ' 8 * :' . $config['real']);
 	}
-
-	if ($read)
-	{
-		//var_dump($read);
-	}
-
-	//var_dump(microtime(true) - $start);
 }
+
+echo PHP_EOL . 'Ran for: ' . var_dump(microtime(true) - $start);
